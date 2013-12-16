@@ -3,11 +3,16 @@ This document contains the specification of the Networked Video Device.
 Networked Video Device is a protocol to send graphics and input through the internet at fast speeds.
 
 Table of Contents
-0. Handshake
-1. Graphics
-2. Input
+0. Specifics
+1. Handshake
+2. Graphics
+3. Input
 
-Section 0. Handshake
+Section 0. Specifics
+
+The Networked Video Device client is run on port 4812. All packets are sent on this port.
+
+Section 1. Handshake
 
 The server and client must have initiated a handshake before data is sent. Please handshake with this packet.
 
@@ -17,7 +22,7 @@ Using packet id 0 will cause the server to store the IP for sending, and will se
 
 If the client gets the packet sent back to it, the handshake is complete!
 
-Section 1. Graphics
+Section 2. Graphics
 
 For the server to send graphics, the server must have implemented OpenGL into their application.
 
@@ -29,5 +34,18 @@ Before you call any OpenGL function in your application, send this packet to the
 
 Where function is the function being called, and vars is a list of variables, seperated by commas.
 
+Section 3. Input
 
-Nick Gauthier
+Input is handled by the client. The client sends the packets when a key or other button is pressed. For mice keys, it is like this
+
+2;h,x,y
+
+Where h is either l, r, or m, corresponding to the mouse buttons.
+x is the x pixel on the screen where the button is pressed.
+y is the y pixel.
+
+Keyboard is handled in a similar way.
+
+3;c
+
+Where c is the keyboard button that is pressed, like "b".
