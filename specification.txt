@@ -7,6 +7,7 @@ Table of Contents
 1. Handshake
 2. Graphics
 3. Input
+4. Audio
 
 Section 0. Specifics
 
@@ -49,3 +50,21 @@ Keyboard is handled in a similar way.
 3;c
 
 Where c is the keyboard button that is pressed, like "b".
+
+Section 4. Audio
+
+To use audio, you have to send a packet containing the data of the .ogg file you would like to play on the client.
+This is the only packet that is bigger than 255 bytes.
+
+4;i,data
+Where i is a unique identifier for the sound.
+data is the contents of the ogg file.
+
+The file will be cached with the unique id. To play the sound, do
+
+5;i,p,s,v
+
+i = id
+p = pitch (0 to 2)
+s = speed (0 to 2)
+v = volume (0 to 2)
